@@ -5,6 +5,8 @@
 
 **Minecraft 26.1.2 · NeoForge · Java 25**
 
+Latest compatibility update: **8.0.1** fixes Builder filter modules not applying their configured contents.
+
 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/rftoolsbuilder-unofficial-atm11-fan-build) · [Downloads](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked/releases) · [Source](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked) · [Report an issue](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked/issues)
 
 An unofficial community port for Minecraft 26.1.2 and NeoForge.

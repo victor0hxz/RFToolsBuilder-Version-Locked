@@ -164,6 +164,10 @@ public class BuilderTileEntity extends TickingTileEntity implements IHudSupport 
    private static ItemStack TOOL_SILK;
    private static ItemStack TOOL_FORTUNE;
    private final Cached<Predicate<ItemStack>> filterCache = Cached.of(this::createFilterCache);
+   // The filter editor mutates a data component on this stack without replacing its
+   // inventory slot. Track that component state so the Builder never retains the
+   // predicate created before the filter was configured.
+   private ItemStack cachedFilterStack = ItemStack.EMPTY;
    private ChunkPos forcedChunk = null;
    private Map<BlockPos, BlockState> cachedBlocks = null;
    private ChunkPos cachedChunk = null;
@@ -892,7 +896,7 @@ public class BuilderTileEntity extends TickingTileEntity implements IHudSupport 
 
    private boolean collectItem(Level world, float infusedFactor, ItemEntity item) {
       ItemStack stack = item.getItem();
-      Predicate<ItemStack> predicate = (Predicate<ItemStack>)this.filterCache.get();
+      Predicate<ItemStack> predicate = this.getFilterCache();
       if (predicate != null && !predicate.test(stack)) {
          return false;
       } else {
@@ -1177,6 +1181,22 @@ public class BuilderTileEntity extends TickingTileEntity implements IHudSupport 
       return FilterModuleItem.getCache(this.items.getStackInSlot(1));
    }
 
+   @Nullable
+   private Predicate<ItemStack> getFilterCache() {
+      ItemStack filter = this.items.getStackInSlot(1);
+      if (!ItemStack.isSameItemSameComponents(filter, this.cachedFilterStack)) {
+         this.cachedFilterStack = filter.copy();
+         this.filterCache.clear();
+      }
+
+      return (Predicate<ItemStack>)this.filterCache.get();
+   }
+
+   private void clearFilterCache() {
+      this.cachedFilterStack = ItemStack.EMPTY;
+      this.filterCache.clear();
+   }
+
    private Pair<BuilderData, Boolean> allowedToBreak(BuilderData data, BlockState state, Level world, BlockPos pos, Player player) {
       if (!state.getBlock().canEntityDestroy(state, world, pos, player)) {
          return this.skip(data, "Cannot destroy!\nAre fake players\nallowed?");
@@ -1259,10 +1279,11 @@ public class BuilderTileEntity extends TickingTileEntity implements IHudSupport 
             }
 
             ItemStack filter = this.items.getStackInSlot(1);
-            if (!filter.isEmpty() && this.filterCache.get() != null) {
+            Predicate<ItemStack> predicate = this.getFilterCache();
+            if (!filter.isEmpty() && predicate != null) {
                boolean match;
                try {
-                  match = ((Predicate)this.filterCache.get()).test(block.getCloneItemStack(this.level, srcPos, srcState, true, null));
+                  match = predicate.test(block.getCloneItemStack(this.level, srcPos, srcState, true, null));
                } catch (Exception var20) {
                   match = false;
                }
@@ -1404,8 +1425,9 @@ public class BuilderTileEntity extends TickingTileEntity implements IHudSupport 
 
             if (srcState.getDestroySpeed(this.level, srcPos) >= 0.0F) {
                ItemStack filter = this.items.getStackInSlot(1);
-               if (!filter.isEmpty() && this.filterCache.get() != null) {
-                  boolean match = ((Predicate)this.filterCache.get()).test(block.getCloneItemStack(this.level, srcPos, srcState, true, null));
+               Predicate<ItemStack> predicate = this.getFilterCache();
+               if (!filter.isEmpty() && predicate != null) {
+                  boolean match = predicate.test(block.getCloneItemStack(this.level, srcPos, srcState, true, null));
                   if (!match) {
                      this.energyStorage.consumeEnergy(Math.min(rfNeeded, (Integer)BuilderConfiguration.builderRfPerSkipped.get()));
                      return this.skip(data);
@@ -2367,7 +2389,7 @@ public class BuilderTileEntity extends TickingTileEntity implements IHudSupport 
          protected void onUpdate(int index, ItemStack stack) {
             super.onUpdate(index, stack);
             if (index == 1) {
-               BuilderTileEntity.this.filterCache.clear();
+               BuilderTileEntity.this.clearFilterCache();
             }
 
             if (index == 0) {

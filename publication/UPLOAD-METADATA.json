@@ -1,6 +1,6 @@
 {
-  "displayName": "rftoolsbuilder-26.1.2-8.0.0-atm11.jar",
-  "changelog": "Publish the previously compiled unofficial ATM11 compatibility artifact with original MIT notice. Production bytecode unchanged. Gameplay retesting and source recovery remain pending.\n",
+  "displayName": "rftoolsbuilder-26.1.2-8.0.1-atm11.jar",
+  "changelog": "Fixed the Builder filter module retaining a stale cached predicate after its configuration changed. Quarrying, voiding, and item collection now evaluate the current filter contents.\n",
   "changelogType": "markdown",
   "releaseType": "beta",
   "relations": {
