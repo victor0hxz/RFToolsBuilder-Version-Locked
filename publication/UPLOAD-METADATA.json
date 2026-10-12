@@ -1,6 +1,6 @@
 {
   "displayName": "rftoolsbuilder-26.1.2-8.0.1-atm11.jar",
-  "changelog": "Fixed the Builder filter module retaining a stale cached predicate after its configuration changed. Quarrying, voiding, and item collection now evaluate the current filter contents.\n",
+  "changelog": "# RFToolsBuilder Version Locked 8.0.1\n\nMinecraft 26.1.2 / NeoForge / ATM11 0.9.0.\n\n- Fixed Builder filter configurations being retained in a stale cache after the filter was changed.\n- Builder now reads the current filter contents while quarrying, collecting items, and voiding.\n- Restored filtered break/place behavior after changing a filter without removing and reinserting it.\n- Verified the packaged JAR uses the current filter predicate in all affected Builder operations.\n\nKeep matching RFToolsBase and McJtyLib ATM11 builds on both client and server. Original RFToolsBuilder credits and MIT license preserved.\n",
   "changelogType": "markdown",
   "releaseType": "beta",
   "relations": {
