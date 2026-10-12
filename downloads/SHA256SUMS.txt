@@ -1,1 +1,2 @@
 eac9fe9d0785f35be54294ed973c1e89c5b355502c814a17de0f565ee764d0e8  rftoolsbuilder-26.1.2-8.0.0-atm11.jar
+6f5f8bfe67098dfcfda7f8c44facace52c75b180b90f138237d41f100b029bff  rftoolsbuilder-26.1.2-8.0.1-atm11.jar

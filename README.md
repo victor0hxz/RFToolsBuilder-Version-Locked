@@ -78,9 +78,8 @@ The Java implementation in `recovered-source/` was reconstructed from the releas
 <!-- visible-downloads -->
 ## Download the compiled mod
 
-- [Download JAR directly](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked/releases/download/mc26.1.2-unofficial-build/rftoolsbuilder-26.1.2-8.0.0-atm11.jar)
-- [Release with JAR, license and checksums](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked/releases/tag/mc26.1.2-unofficial-build)
-- [JAR in this repository](downloads/rftoolsbuilder-26.1.2-8.0.0-atm11.jar)
+- [Download JAR 8.0.1 from this repository](downloads/rftoolsbuilder-26.1.2-8.0.1-atm11.jar)
+- [Previous GitHub release](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked/releases/tag/mc26.1.2-unofficial-build)
 
 The compiled mod is available above. This repository distributes audited binaries, documentation and [recovered Java implementation](recovered-source); the original modified development source was not located. The release remains a prerelease because full gameplay validation has not been repeated.
 
@@ -92,7 +91,7 @@ This is an **unofficial fan-maintained distribution** of a previously compiled c
 
 ## Installation
 
-Download `rftoolsbuilder-26.1.2-8.0.0-atm11.jar` from [Releases](https://github.com/victor0hxz/RFToolsBuilder-Version-Locked/releases). Requirements: Matching McJtyLib and RFTools Base ATM11 builds; NeoForge 26.1.2.109; Java 25. Replace older copies of the same mod; the mod ID is preserved, so do not install this build alongside another copy of the same mod. Use matching versions of McJtyLib and the RFTools modules.
+Download `rftoolsbuilder-26.1.2-8.0.1-atm11.jar` from this repository. Requirements: Matching McJtyLib and RFTools Base ATM11 builds; NeoForge 26.1.2.109; Java 25. Replace older copies of the same mod; the mod ID is preserved, so do not install this build alongside another copy of the same mod. Use matching versions of McJtyLib and the RFTools modules.
 
 ## Validation and limitations
 
